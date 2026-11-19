@@ -62,13 +62,8 @@ Luồng kiểm thử **FR-02 → FR-11 → FR-10** bao phủ trọn vẹn 3 nhó
 - **CPU/RAM:** Không có mẫu tài nguyên mới ghép với lượt rerun; các CSV trước đó không được dùng để kết luận bộ nhớ/rò rỉ.
 - **Trạng thái CLI:** Kịch bản Soak hoàn tất 12 phút, sau đó tiến trình k6 bị dừng thủ công để đóng dashboard và trả mã 1. Xem ghi chú trong báo cáo.
 
-### 2.4. Số lượng lỗi phát hiện trên SUT (Bugs / Performance Issues)
-Đã ghi nhận 3 lỗi qua review mã nguồn; bản nháp issue hiện ở workspace, chưa đăng lên GitHub Issues:
-1. **FR-02:** Bộ đếm đăng nhập sai tăng gấp đôi (+2) và thời gian khóa tài khoản là 180s (sai lệch so với đặc tả là +1 và 30s).
-2. **FR-10:** Cho phép hủy đơn hàng đang ở trạng thái vận chuyển (`shipping`), vi phạm quy tắc máy trạng thái.
-3. **FR-08:** API checkout nhận trực tiếp `total_amount` từ Client mà không tính toán lại từ giỏ hàng, có thể làm sai lệch tổng tiền đơn; ảnh hưởng thanh toán downstream chưa được xác minh.
 
-### 2.5. Link Video Demo (YouTube Video Link)
+### 2.44. Link Video Demo (YouTube Video Link)
 [Xem video demo trên YouTube](https://youtu.be/bfE4SoD0tQo) (Unlisted).
 
 ---
@@ -80,7 +75,7 @@ HW05-Performance-Testing/
 ├── README.md
 ├── demo/
 │   └── link video demo.txt
-├── prepare-order/
+├── tools/
 │   └── prepare-orders.mjs
 ├── test-data/
 │   ├── load.csv
@@ -114,7 +109,7 @@ node server.js
 
 ```powershell
 $env:BASE_URL = 'http://127.0.0.1:3002'
-node prepare-order/prepare-orders.mjs
+node tools/prepare-orders.mjs
 ```
 
 ### Bước 3: Chạy các kịch bản kiểm thử k6
