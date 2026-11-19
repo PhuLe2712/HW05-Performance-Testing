@@ -113,14 +113,9 @@ Luồng kiểm thử **FR-02 → FR-11 → FR-10** bao phủ trọn vẹn 3 nhó
 │   ├── bug-report.md                       # Báo cáo 3 lỗi phát hiện trên SUT
 │   ├── soak-stage-analysis.md              # Phân tích chi tiết từng giai đoạn Soak test
 │   └── git-commit-log.txt                  # Lịch sử commit Git
-├── skills/
-│   └── eshop-performance-testing/          # Agent Skill tái sử dụng kiểm thử hiệu năng
-│       ├── SKILL.md
-│       └── references/
-│           └── eshop-workflow-invariants.md
 ├── tools/
 │   ├── prepare-orders.mjs                  # Script tự động tạo đơn hàng fixture một chiều
-└── screenshots/                            # Ảnh chụp màn hình tool + Task Manager cùng khung hình
+├── demo/`r`n│   └── link video demo.txt                 # Link YouTube Unlisted`r`n└── screenshots/                            # Ảnh DxDiag và ảnh tool + Task Manager
 ```
 
 ---
@@ -163,5 +158,6 @@ k6 run --out json=results/spike.jsonl test-plans/23120325_Spike_20261119.js
 $env:SCENARIO = 'soak'
 k6 run --out json=results/soak.jsonl test-plans/23120325_Soak_20261119.js
 ```
+
 
 
