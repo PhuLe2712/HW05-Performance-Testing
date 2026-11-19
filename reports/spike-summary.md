@@ -8,6 +8,6 @@
 | iterations | 100 |
 | failed_rate | 0 |
 | checks_passed | 1 |
-| http_req_avg_ms | 2326.3104225 |
-| http_req_p95_ms | 4645.403009999998 |
-| http_req_max_ms | 5534.2767 |
+| http_req_avg_ms | 609.8008519999998 |
+| http_req_p95_ms | 1078.3249899999998 |
+| http_req_max_ms | 1231.6878 |
