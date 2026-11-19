@@ -8,13 +8,13 @@
 **Luồng nghiệp vụ lựa chọn:** **FR-02 → FR-11 → FR-10** (Đăng nhập → Xem lịch sử đơn hàng → Hủy đơn hàng và xác minh trạng thái)  
 **Link kho chứa mã nguồn (GitHub Repo):** [https://github.com/PhuLe2712/HW05-Performance-Testing](https://github.com/PhuLe2712/HW05-Performance-Testing)
 
-> **Số liệu chuẩn của lượt chạy lại ngày 19/11/2026:** xem [execution-summary.md](reports/rerun-20261119/execution-summary.md); raw JSONL nằm trong `results/`; các dashboard HTML nằm trong `reports/rerun-20261119/`. Hồ sơ chưa phải bản nộp cuối vì còn thiếu ảnh tài nguyên của lượt rerun, video và PDF.
+> **Số liệu chuẩn của lượt chạy lại ngày 19/11/2026:** xem execution summary và raw JSONL trong bộ hồ sơ kết quả. Video demo đã có tại [YouTube (Unlisted)](https://youtu.be/bfE4SoD0tQo). Ảnh tài nguyên phải khớp lượt rerun và các bản PDF vẫn cần hoàn thiện trước khi nộp.
 
 ---
 
 ## 1. Bảng Tự Đánh Giá Điểm (Self-Assessment Table)
 
-Điểm tự đánh giá cần sinh viên chốt trước khi đặt tên gói ZIP; hiện chưa tự điền điểm.
+Bảng dưới đây là mức tự đánh giá hiện tại; Agent Skill không thực hiện nên tự chấm 0/10.
 
 | Tiêu chí | Điểm tối đa | Tự đánh giá |
 |---|---:|---:|
@@ -23,10 +23,10 @@
 | Task 1 — Spike testing | 20 | 20 |
 | Task 2 — AI analysis and misinterpretation hunt | 10 | 10 |
 | Task 3 — Continuous Performance Testing proposal | 10 | 10 |
-| Agent Skill | 10 | 10 |
-| **Tổng** | **100** | **100** |
+| Agent Skill | 10 | 0 |
+| **Tổng** | **100** | **90** |
 
-Bốn kịch bản k6 đã chạy và có raw JSONL; bằng chứng CPU/RAM đồng thời, video demo và các PDF bắt buộc còn thiếu.
+Bốn kịch bản k6 đã chạy. Link video demo đã được bổ sung. Bộ ảnh hiện có là ảnh lượt chạy trước; cần ảnh CPU/RAM đồng thời cho lượt rerun. PDF báo cáo và các tài liệu bắt buộc dạng PDF vẫn còn thiếu. Agent Skill không thực hiện (0/10).
 
 ### Tình trạng deliverables
 
@@ -35,8 +35,8 @@ Bốn kịch bản k6 đã chạy và có raw JSONL; bằng chứng CPU/RAM đ�
 | Task 1 — Load, Stress, Spike, Soak | Chạy xong; Soak CLI trả mã 1 sau khi bị dừng thủ công khi scenario đã hoàn tất | [Raw-derived summary](reports/rerun-20261119/execution-summary.md) và raw JSONL |
 | Task 2 — AI analysis và review | Nội dung hiện có; kết quả hiệu năng cũ đã được thay bằng số liệu rerun ở báo cáo chính | [AI analysis](docs/ai-analysis.md), [report](reports/23120325_HW05_Performance_Report.md) |
 | Task 3 — Continuous performance proposal | Có tài liệu và sơ đồ | [Continuous performance testing](docs/continuous-performance-testing.md) |
-| Agent Skill | Có SKILL.md và tài liệu tham chiếu | [Skill](skills/eshop-performance-testing/SKILL.md) |
-| Bằng chứng nộp bài | Còn thiếu ảnh tài nguyên của lượt rerun, video demo, và các PDF bắt buộc |
+| Agent Skill | Không thực hiện; tự đánh giá 0/10 | — |
+| Bằng chứng nộp bài | Đã có link video; còn thiếu ảnh tài nguyên khớp lượt rerun và các PDF bắt buộc |
 
 ---
 
@@ -69,7 +69,7 @@ Luồng kiểm thử **FR-02 → FR-11 → FR-10** bao phủ trọn vẹn 3 nhó
 3. **FR-08:** API checkout nhận trực tiếp `total_amount` từ Client mà không tính toán lại từ giỏ hàng, có thể làm sai lệch tổng tiền đơn; ảnh hưởng thanh toán downstream chưa được xác minh.
 
 ### 2.5. Link Video Demo (YouTube Video Link)
-Chưa quay và chưa có URL video. Không dùng link mẫu; video cần được sinh viên tự thuyết minh và tải lên Unlisted.
+[Xem video demo trên YouTube](https://youtu.be/bfE4SoD0tQo) (Unlisted).
 
 ---
 
@@ -163,4 +163,5 @@ k6 run --out json=results/spike.jsonl test-plans/23120325_Spike_20261119.js
 $env:SCENARIO = 'soak'
 k6 run --out json=results/soak.jsonl test-plans/23120325_Soak_20261119.js
 ```
+
 
