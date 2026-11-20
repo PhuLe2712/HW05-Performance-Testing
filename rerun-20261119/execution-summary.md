@@ -11,12 +11,6 @@ Các số liệu được tính lại từ từng point trong raw JSONL của l�
 
 Ghi chú percentile: bảng này tính p95 theo nearest-rank trực tiếp trên raw samples. Các summary do k6 xuất ra dùng bộ ước lượng p95 riêng của k6, nên có thể lệch vài phần mười mili giây; tất cả cùng xuất phát từ cùng một lần chạy.
 
-## Raw logs và báo cáo
-
-- [Load raw JSONL](../../results/load.jsonl) · [Load HTML summary](../load-summary.html) · [Load dashboard](dashboard/load/index.html)
-- [Stress raw JSONL](../../results/stress.jsonl) · [Stress JSON summary](../stress-summary.json) · [Stress dashboard](dashboard/stress/index.html)
-- [Spike raw JSONL](../../results/spike.jsonl) · [Spike Markdown summary](../spike-summary.md) · [Spike dashboard](dashboard/spike/index.html)
-- [Soak raw JSONL](../../results/soak.jsonl) · [Soak dashboard](dashboard/soak/index.html)
 
 ## Soak theo giai đoạn
 
@@ -34,6 +28,3 @@ Soak chạy hết 12 phút: 939 iterations hoàn tất, 0 bị ngắt. Tốc đ�
 
 Sau khi scenario Soak hoàn tất, tiến trình k6 vẫn mở do web dashboard. Mình ngắt tiến trình thủ công để đóng dashboard; CLI trả mã thoát 1. Vì vậy không ghi nhận lần chạy Soak này là CLI exit 0. Raw JSONL và HTML dashboard đã được ghi; các tỷ lệ lỗi, checks và thống kê trên được tính trực tiếp từ raw points. Ba kịch bản Load, Stress và Spike kết thúc bình thường với mã thoát 0.
 
-## Bằng chứng CPU/RAM
-
-Không có mẫu CPU/RAM mới cho lượt chạy lại. Không có mẫu CPU/RAM mới; tài nguyên của lượt trước không được đưa vào bộ hồ sơ này hoặc gộp vào báo cáo. Ảnh chụp màn hình có sẵn trong [`screenshots`](../../screenshots/) cũng thuộc các lượt chạy trước. Cần ghi/chụp lại khi kịch bản đang chạy để chứng minh k6, backend và CPU/RAM cùng thời điểm.
