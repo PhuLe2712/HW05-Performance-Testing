@@ -1,10 +1,9 @@
 ﻿# HW05 – Performance Testing (Kiểm Thử Hiệu Năng API)
 
-**Mã bài tập:** HW05-AI  
 **Mã số sinh viên (MSSV):** 23120325  
 **Họ và tên sinh viên:** Lê Mạnh Phú  
 **Hệ thống kiểm thử (SUT):** EShop Backend REST API  
-**Công cụ kiểm thử:** k6 v2.3.0 (Tùy chọn k6 được khuyến khích tính điểm bonus)  
+**Công cụ kiểm thử:** k6 v2.3.0 
 **Luồng nghiệp vụ lựa chọn:** **FR-02 → FR-11 → FR-10** (Đăng nhập → Xem lịch sử đơn hàng → Hủy đơn hàng và xác minh trạng thái)  
 **Link kho chứa mã nguồn (GitHub Repo):** [https://github.com/PhuLe2712/HW05-Performance-Testing](https://github.com/PhuLe2712/HW05-Performance-Testing)
 
