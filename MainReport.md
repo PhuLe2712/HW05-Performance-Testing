@@ -286,15 +286,14 @@ flowchart TD  A[Commit hoặc Pull Request] --> B{Thay đổi backend/API/DB/aut
 
 **-** **Giới** **hạn:** chưa có workflow CI hay baseline đa lần để chứng minh threshold 20% phù hợp.
 
-## **IV. AI Critique**
-Trong quá trình thực hiện bài tập, em sử dụng Codex để hỗ trợ tạo các kịch bản kiểm thử k6, chuẩn bị dữ liệu và phân tích kết quả kiểm thử hiệu năng. AI giúp em tiết kiệm thời gian, đặc biệt trong việc tạo các file Load Test, Stress Test, Spike Test và Soak Test. Tuy nhiên, sau khi kiểm tra và chạy thử, em nhận thấy một số nội dung AI đưa ra vẫn cần được điều chỉnh.
+**IV. AI Analyst Critique**
 
-Đầu tiên, AI có sự nhầm lẫn khi phân tích chỉ số p95 trong Spike Test. AI sử dụng giá trị p95 tổng thể là 1078.077 ms, nhưng khi kiểm tra từng bước nghiệp vụ, em nhận thấy thao tác hủy đơn hàng (FR-10) có p95 lên đến 1128.594 ms. Vì vậy, em đã đối chiếu lại raw JSONL và tách kết quả theo từng bước để tránh bỏ sót thao tác có độ trễ cao.
+Khi xem xét kết quả phân tích của AI ở Task 2, em nhận thấy cần phân biệt p95 tổng thể với p95 của từng bước nghiệp vụ. Trong Spike Test, p95 tổng thể của 400 request là 1078.077 ms, trong khi p95 riêng của bước FR-10 – Hủy đơn hàng là 1128.594 ms. Hai giá trị này phản ánh hai phạm vi khác nhau; không thể dùng p95 tổng thể để đại diện cho độ trễ của riêng endpoint hủy đơn. Vì vậy, em đã đối chiếu raw JSONL và sử dụng thêm số liệu p95 theo từng bước khi xác định điểm có độ trễ cao.
 
-Thứ hai, một số nhận định của AI vượt quá những gì dữ liệu thực tế chứng minh. Chẳng hạn, kết quả Soak Test cho thấy hệ thống có thể duy trì hoạt động trong 12 phút, nhưng do thiếu dữ liệu CPU và RAM được ghi nhận đồng bộ nên chưa thể kết luận hệ thống không bị memory leak hoặc đã xác định được giới hạn phần cứng.
+Đối với Soak Test, kết quả ghi nhận 939 workflow trong khoảng 12 phút; tại plateau 10 VUs, hệ thống đạt 9.891 requests/s và p95 là 20.220 ms. Tuy nhiên, lượt chạy lại không có dữ liệu CPU/RAM được ghi nhận đồng bộ. Do đó, các số liệu hiện có chỉ hỗ trợ đánh giá request, throughput và latency, chưa đủ để kết luận về memory leak, mức bão hòa tài nguyên hoặc giới hạn chịu tải của phần cứng.
 
-Ngoài ra, các đề xuất như Database Index, SQLite WAL và Connection Pool chỉ là những hướng tối ưu cần thử nghiệm thêm. Em không xem chúng là giải pháp chắc chắn hiệu quả khi chưa có kết quả benchmark để xác nhận.
+Các đề xuất tối ưu cũng cần được xem là giả thuyết cần kiểm chứng. Composite index trên orders(user_id, id) có cơ sở từ điều kiện lọc và sắp xếp của truy vấn lịch sử đơn hàng, nhưng cần kiểm tra bằng EXPLAIN QUERY PLAN và benchmark trước/sau. SQLite WAL có thể được thử nghiệm trên cùng workload, trong khi connection pool không mặc nhiên làm tăng throughput ghi vì SQLite vẫn có giới hạn một writer tại một thời điểm.
 
-Qua bài tập, em nhận thấy AI phù hợp để hỗ trợ viết mã, chuẩn bị dữ liệu và phân tích ban đầu. Tuy nhiên, người thực hiện vẫn phải kiểm tra mã nguồn, đối chiếu raw logs và tự đánh giá kết quả trước khi đưa ra kết luận.
+Từ các điểm trên, em đã ưu tiên đối chiếu số liệu AI đưa ra với raw JSONL, phân tích riêng từng bước nghiệp vụ và chỉ giữ các kết luận nằm trong phạm vi dữ liệu thực tế. Những nhận định chưa có bằng chứng phù hợp được ghi rõ là giới hạn hoặc hướng cần thử nghiệm thêm, thay vì xem là kết quả đã được xác nhận.
 
 
