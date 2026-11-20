@@ -286,16 +286,15 @@ flowchart TD  A[Commit hoặc Pull Request] --> B{Thay đổi backend/API/DB/aut
 
 **-** **Giới** **hạn:** chưa có workflow CI hay baseline đa lần để chứng minh threshold 20% phù hợp.
 
-**IV.** **AI Critique**
+## **IV. AI Critique**
+Trong quá trình thực hiện bài tập, em sử dụng Codex để hỗ trợ tạo các kịch bản kiểm thử k6, chuẩn bị dữ liệu và phân tích kết quả kiểm thử hiệu năng. AI giúp em tiết kiệm thời gian, đặc biệt trong việc tạo các file Load Test, Stress Test, Spike Test và Soak Test. Tuy nhiên, sau khi kiểm tra và chạy thử, em nhận thấy một số nội dung AI đưa ra vẫn cần được điều chỉnh.
 
-Trong quá trình thực hiện HW05, AI hỗ trợ tôi thiết kế kịch bản kiểm thử, tổng hợp kết quả và đề xuất các phương án tối ưu hiệu năng. Tuy nhiên, quá trình đối chiếu với raw JSONL cho thấy AI vẫn có những hạn chế trong việc diễn giải số liệu và đánh giá phạm vi của phép đo.
+Đầu tiên, AI có sự nhầm lẫn khi phân tích chỉ số p95 trong Spike Test. AI sử dụng giá trị p95 tổng thể là 1078.077 ms, nhưng khi kiểm tra từng bước nghiệp vụ, em nhận thấy thao tác hủy đơn hàng (FR-10) có p95 lên đến 1128.594 ms. Vì vậy, em đã đối chiếu lại raw JSONL và tách kết quả theo từng bước để tránh bỏ sót thao tác có độ trễ cao.
 
-Một ví dụ là kết quả Spike Test. Pooled p95 của toàn bộ request là 1078.077 ms, trong khi p95 riêng của bước hủy đơn hàng FR-10 là 1128.594 ms. Nếu sử dụng chỉ số tổng hợp để đại diện cho độ trễ của một endpoint, kết quả phân tích sẽ thiếu chính xác. Vì vậy, cần phân biệt độ trễ toàn workflow và độ trễ của từng bước nghiệp vụ.
+Thứ hai, một số nhận định của AI vượt quá những gì dữ liệu thực tế chứng minh. Chẳng hạn, kết quả Soak Test cho thấy hệ thống có thể duy trì hoạt động trong 12 phút, nhưng do thiếu dữ liệu CPU và RAM được ghi nhận đồng bộ nên chưa thể kết luận hệ thống không bị memory leak hoặc đã xác định được giới hạn phần cứng.
 
-Ngoài ra, AI có thể đưa ra kết luận vượt quá dữ liệu thực tế. Soak Test đạt 9.891 requests/s tại plateau 10 VUs, với p95 là 20.220 ms. Tuy nhiên, do không có dữ liệu CPU và RAM đồng bộ trong lần chạy lại, chưa thể xác định giới hạn tài nguyên hoặc kết luận hệ thống không xảy ra memory leak. Tương tự, số lượng mẫu của Load Test chỉ có 25 mẫu mỗi bước nên p95 chưa đủ ổn định để đưa ra kết luận chắc chắn.
+Ngoài ra, các đề xuất như Database Index, SQLite WAL và Connection Pool chỉ là những hướng tối ưu cần thử nghiệm thêm. Em không xem chúng là giải pháp chắc chắn hiệu quả khi chưa có kết quả benchmark để xác nhận.
 
-Các đề xuất như thêm Database Index, bật SQLite WAL và sử dụng Connection Pool cũng cần được kiểm chứng bằng benchmark thay vì áp dụng ngay. Nguyên nhân là AI chủ yếu dựa trên thông tin được cung cấp và có thể chưa xét đầy đủ đặc điểm triển khai thực tế của SUT.
-
-Qua bài tập này, tôi rút ra rằng AI phù hợp để hỗ trợ phân tích và hình thành giả thuyết, nhưng không thể thay thế việc kiểm chứng dữ liệu gốc, rà soát mã nguồn và thực nghiệm có kiểm soát. Người thực hiện phải chịu trách nhiệm đánh giá và xác nhận mọi kết luận trước khi đưa vào báo cáo.
+Qua bài tập, em nhận thấy AI phù hợp để hỗ trợ viết mã, chuẩn bị dữ liệu và phân tích ban đầu. Tuy nhiên, người thực hiện vẫn phải kiểm tra mã nguồn, đối chiếu raw logs và tự đánh giá kết quả trước khi đưa ra kết luận.
 
 
