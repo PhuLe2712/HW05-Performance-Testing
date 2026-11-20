@@ -1,4 +1,4 @@
-  import { runWorkflow, assertFixtureCount } from './common.js';
+import { runWorkflow, assertFixtureCount } from './common.js';
 import { markdownReport } from './report.js';
 
 const fixtureRows = 1000;
